@@ -33,6 +33,11 @@ function Nav() {
               Login
             </Link>
           </li>
+          <li className="mx-1">
+            <Link to="https://blog-beats.onrender.com">
+              Blog Beats
+            </Link>
+          </li>
         </ul>
       );
     }

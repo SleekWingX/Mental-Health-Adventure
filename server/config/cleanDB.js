@@ -15,4 +15,3 @@ module.exports = async (modelName, collectionName) => {
   }
 }
 
-//test
