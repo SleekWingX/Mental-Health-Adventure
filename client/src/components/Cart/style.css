@@ -8,7 +8,7 @@
   background-color: var(--light);
   overflow: auto;
   padding: .5rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, .5);
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   border-bottom-left-radius: .5rem;
 }
 
@@ -38,10 +38,10 @@
   font-size: 2rem;
   cursor: pointer;
   background-color: var(--secondary);
-  border-radius: 50%;
-  padding: .25rem;
-  width: 50px;
-  height: 50px;
+  border-radius: 80%;
+  padding: .5rem;
+  width: 80px;
+  height: 80px;
 }
 
 .cart-closed:hover {
@@ -73,3 +73,68 @@
     margin: 0 auto;
   }
 }
+signup {
+  background-color: aqua;
+}
+/* customStyles.css */
+
+.ant-form-item-label > label {
+  color: #1cd961; /* Label text color */
+}
+
+.ant-input {
+  background-color: #d25c2e; /* Input background color */
+  color: #BFC0C0; /* Input text color */
+}
+
+.ant-input::placeholder {
+  color: #2ba974 ; /* Placeholder text color */
+}
+
+.ant-btn-primary {
+  background-color: #b326a9; /* Button background color */
+  border-color: #ffffff; /* Button border color */
+  color: #ffffff; /* Button text color */
+}
+
+.ant-btn-primary:hover {
+  background-color: #274d49; /* Darker shade for hover state */
+  border-color: #274d49; /* Darker shade for hover state */
+}
+
+.ant-btn-secondary {
+  border-color: #322cda; /* Secondary button border color */
+  color: #e297e3; /* Secondary button text color */
+}
+
+.ant-btn-secondary:hover {
+  background-color: #1609a2; /* Darker shade for hover state */
+  border-color: #ffffff; /* Darker shade for hover state */
+}
+
+.container {
+  background-color: #0e084a; /* Container background color */
+  color: #76d158;
+  padding: 10px;
+  width: 50%;
+  border-radius: 8px;
+  border: 10px solid #2D3142; /* Container border color */
+  margin-right: auto;
+}
+
+.title {
+  color: #E5625E; /* Title text color */
+}
+
+/* customStyles.css or index.css */
+
+#root {
+  background-color: #000000;
+  background-image:url('https://img.freepik.com/free-vector/futuristic-technological-wallpaper_79603-1093.jpg?t=st=1723006781~exp=1723010381~hmac=f3c726a4754edee3f59456a8e5e881d31519685e9f430000a554aa1ad3b32212&w=826'); /* Replace with your second image URL */
+  background-size: cover; /* Adjust sizes as needed */
+  background-repeat: no-repeat;
+  background-position: right, left; /* Adjust positions as needed */
+  min-height: 100vh; /* Ensure the background covers the full height */
+}
+
+

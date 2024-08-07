@@ -1,25 +1,40 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations';
+import { Form, Input, Button, Typography, Modal } from 'antd';
+import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
+import '../components/Cart/index'; // Ensure this path is correct based on your project structure
+
+const { Title } = Typography;
 
 function Signup(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [addUser] = useMutation(ADD_USER);
+  const [formState, setFormState] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
+  });
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [addUser, { error }] = useMutation(ADD_USER);
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const mutationResponse = await addUser({
-      variables: {
-        email: formState.email,
-        password: formState.password,
-        firstName: formState.firstName,
-        lastName: formState.lastName,
-      },
-    });
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
+  const handleFormSubmit = async (values) => {
+    try {
+      const mutationResponse = await addUser({
+        variables: {
+          email: values.email,
+          password: values.password,
+          firstName: values.firstName,
+          lastName: values.lastName,
+        },
+      });
+      const token = mutationResponse.data.addUser.token;
+      Auth.login(token);
+      setIsModalVisible(true); // Show modal upon successful submission
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleChange = (event) => {
@@ -30,56 +45,85 @@ function Signup(props) {
     });
   };
 
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <div className="container my-1">
-      <Link to="/login">← Go to Login</Link>
+      <Link to="/login" className="ant-btn-secondary">← Go to Login</Link>
 
-      <h2>Signup</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="firstName">First Name:</label>
-          <input
-            placeholder="First"
+      <Title level={2} className="title" style={{ color: '#ffffff' }}>Signup</Title>
+      <Form
+        name="signup"
+        initialValues={{ remember: true }}
+        onFinish={handleFormSubmit}
+      >
+        <Form.Item
+          name="firstName"
+          rules={[{ required: true, message: 'Please input your first name!' }]}
+        >
+          <Input
+            prefix={<UserOutlined />}
+            placeholder="First Name"
             name="firstName"
-            type="firstName"
-            id="firstName"
+            value={formState.firstName}
             onChange={handleChange}
           />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="lastName">Last Name:</label>
-          <input
-            placeholder="Last"
+        </Form.Item>
+        <Form.Item
+          name="lastName"
+          rules={[{ required: true, message: 'Please input your last name!' }]}
+        >
+          <Input
+            prefix={<UserOutlined />}
+            placeholder="Last Name"
             name="lastName"
-            type="lastName"
-            id="lastName"
+            value={formState.lastName}
             onChange={handleChange}
           />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email:</label>
-          <input
-            placeholder="youremail@test.com"
+        </Form.Item>
+        <Form.Item
+          name="email"
+          rules={[{ required: true, message: 'Please input your email!' }]}
+        >
+          <Input
+            prefix={<MailOutlined />}
+            placeholder="Email"
             name="email"
             type="email"
-            id="email"
+            value={formState.email}
             onChange={handleChange}
           />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
-          <input
-            placeholder="******"
-            name="password"
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[{ required: true, message: 'Please input your password!' }]}
+        >
+          <Input
+            prefix={<LockOutlined />}
             type="password"
-            id="pwd"
+            placeholder="Password"
+            name="password"
+            value={formState.password}
             onChange={handleChange}
           />
-        </div>
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+      {error && <div>Signup failed</div>}
+
+      <Modal title="Success" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <img src="https://via.placeholder.com/400" alt="Success" style={{ width: '100%' }} />
+      </Modal>
     </div>
   );
 }
