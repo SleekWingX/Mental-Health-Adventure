@@ -63,9 +63,11 @@ const Cart = () => {
   if (!state.cartOpen) {
     return (
       <div className="cart-closed" onClick={toggleCart}>
-        <span role="img" aria-label="trash">
-          🛒
-        </span>
+        <img
+          src="https://media1.tenor.com/m/NVwxxoyoyGgAAAAd/racoon-pedro.gif" /* Replace with your image URL */
+          alt="cart"
+          className="cart-icon"
+        />
       </div>
     );
   }
@@ -75,7 +77,7 @@ const Cart = () => {
       <div className="close" onClick={toggleCart}>
         [close]
       </div>
-      <h2>Shopping Cart</h2>
+      <h2>Trash Pandas</h2>
       {state.cart.length ? (
         <div>
           {state.cart.map((item) => (
