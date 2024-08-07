@@ -17,6 +17,8 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
-    "@googlemaps/google-maps-services-js": "^3.4.0"
+    "@googlemaps/google-maps-services-js": "^3.4.0",
+    "dotenv": "^16.4.5",
+    "jsonwebtoken": "^9.0.2"
   }
 }
