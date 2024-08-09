@@ -5,8 +5,6 @@ const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 const placesRoutes = require('./routes/api/placesRoutes');
-const authRoutes = require('./routes/api/authRoutes');
-const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -24,7 +22,6 @@ const server = new ApolloServer({
 });
 
 // Middleware
-app.use(helmet());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -42,7 +39,6 @@ if (process.env.NODE_ENV === 'production') {
 
 // API Routes
 app.use('/api/places', placesRoutes);
-app.use('/api/auth', authRoutes);
 
 // Start Apollo Server
 const startApolloServer = async () => {
