@@ -44,21 +44,28 @@ app.use('/api/places', placesRoutes);
 const startApolloServer = async () => {
   await server.start();
 
-  app.use('/graphql', expressMiddleware(server, {
-    context: ({ req }) => {
-      const token = req.headers.authorization || '';
-      if (token) {
-        try {
-          const { data } = jwt.verify(token.split(' ').pop().trim(), process.env.JWT_SECRET, { maxAge: '2h' });
-          return { user: data };
-        } catch (err) {
-          console.error('Invalid token');
-          throw new AuthenticationError();
-        }
-      }
-      return {};
-    }
-  }));
+  app.use(
+    '/graphql',
+    expressMiddleware(server, {
+      context: authMiddleware,
+    })
+  );
+
+  // app.use('/graphql', expressMiddleware(server, {
+  //   context: ({ req }) => {
+  //     const token = req.headers.authorization || '';
+  //     if (token) {
+  //       try {
+  //         const { data } = jwt.verify(token.split(' ').pop().trim(), process.env.JWT_SECRET, { maxAge: '2h' });
+  //         return { user: data };
+  //       } catch (err) {
+  //         console.error('Invalid token');
+  //         throw new AuthenticationError();
+  //       }
+  //     }
+  //     return {};
+  //   }
+  // }));
 
   db.once('open', () => {
     app.listen(PORT, () => {
@@ -70,4 +77,3 @@ const startApolloServer = async () => {
 
 // Call the async function to start the server
 startApolloServer();
-

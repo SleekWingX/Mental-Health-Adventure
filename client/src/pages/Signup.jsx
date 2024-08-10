@@ -9,17 +9,18 @@ import '../components/Cart/index'; // Ensure this path is correct based on your 
 
 const { Title } = Typography;
 
-function Signup(props) {
+function Signup() {
   const [formState, setFormState] = useState({
     firstName: '',
     lastName: '',
     email: '',
-    password: ''
+    password: '',
   });
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [addUser, { error }] = useMutation(ADD_USER);
+  const [addUser, { data, error }] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (values) => {
+    console.log('Values: 23', values);
     try {
       const mutationResponse = await addUser({
         variables: {
@@ -29,6 +30,7 @@ function Signup(props) {
           lastName: values.lastName,
         },
       });
+      console.log('response data', data);
       const token = mutationResponse.data.addUser.token;
       Auth.login(token);
       setIsModalVisible(true); // Show modal upon successful submission
@@ -55,9 +57,13 @@ function Signup(props) {
 
   return (
     <div className="container my-1">
-      <Link to="/login" className="ant-btn-secondary">← Go to Login</Link>
+      <Link to="/login" className="ant-btn-secondary">
+        ← Go to Login
+      </Link>
 
-      <Title level={2} className="title" style={{ color: '#ffffff' }}>Signup</Title>
+      <Title level={2} className="title" style={{ color: '#ffffff' }}>
+        Signup
+      </Title>
       <Form
         name="signup"
         initialValues={{ remember: true }}
@@ -121,8 +127,17 @@ function Signup(props) {
       </Form>
       {error && <div>Signup failed</div>}
 
-      <Modal title="Success" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <img src="https://via.placeholder.com/400" alt="Success" style={{ width: '100%' }} />
+      <Modal
+        title="Success"
+        open={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <img
+          src="https://via.placeholder.com/400"
+          alt="Success"
+          style={{ width: '100%' }}
+        />
       </Modal>
     </div>
   );
