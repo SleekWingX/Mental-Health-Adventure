@@ -40,3 +40,38 @@
 .read-the-docs {
   color: #888;
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Global form input styles */
+input {
+  width: 100%; /* Full width input */
+  padding: 0.75rem; /* Add padding for better touch support */
+  margin-bottom: 1rem; /* Space between inputs */
+  border: 1px solid var(--dark); /* Border styling */
+  border-radius: 5px; /* Rounded corners */
+  box-sizing: border-box; /* Ensure padding is included in the element's width and height */
+}
+
+input:focus {
+  border-color: var(--secondary); /* Change border color on focus */
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+button {
+  width: 100%; /* Full width buttons */
+  padding: 0.75rem;
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--secondary); /* Darken on hover */
+}
