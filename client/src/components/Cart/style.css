@@ -59,6 +59,7 @@
   margin: 0 .5rem 1rem 0;
 }
 
+/* Media queries for mobile devices */
 @media screen and (max-width: 768px) {
   .cart {
     position: relative;
@@ -66,18 +67,34 @@
     max-height: auto;
     box-shadow: none;
     background-color: inherit;
+    width: 100%;
+    margin: 0;
+    padding: 1rem;
   }
 
   .cart-closed {
     position: relative;
     margin: 0 auto;
+    width: 60px; /* Adjusted size for mobile */
+    height: 60px; /* Adjusted size for mobile */
+  }
+
+  .flex-row {
+    flex-direction: column; /* Stack items vertically on small screens */
+  }
+
+  button {
+    width: 100%; /* Make buttons full width on mobile */
+    margin-top: 1rem;
   }
 }
-signup {
+
+/* General Styles */
+.signup {
   background-color: aqua;
 }
-/* customStyles.css */
 
+/* Custom Styles */
 .ant-form-item-label > label {
   color: #1cd961; /* Label text color */
 }
@@ -126,15 +143,12 @@ signup {
   color: #E5625E; /* Title text color */
 }
 
-/* customStyles.css or index.css */
-
+/* Background Image Styles */
 #root {
   background-color: #000000;
-  background-image:url('https://img.freepik.com/free-vector/futuristic-technological-wallpaper_79603-1093.jpg?t=st=1723006781~exp=1723010381~hmac=f3c726a4754edee3f59456a8e5e881d31519685e9f430000a554aa1ad3b32212&w=826'); /* Replace with your second image URL */
+  background-image: url('https://img.freepik.com/free-vector/futuristic-technological-wallpaper_79603-1093.jpg?t=st=1723006781~exp=1723010381~hmac=f3c726a4754edee3f59456a8e5e881d31519685e9f430000a554aa1ad3b32212&w=826'); 
   background-size: cover; /* Adjust sizes as needed */
   background-repeat: no-repeat;
   background-position: right, left; /* Adjust positions as needed */
   min-height: 100vh; /* Ensure the background covers the full height */
 }
-
-
