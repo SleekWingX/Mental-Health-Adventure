@@ -1,7 +1,7 @@
 // src/pages/Dashboard/Dashboard.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
+import { Link } from 'react-router-dom';
 import './Dashboard.css';
 
 function Dashboard() {
