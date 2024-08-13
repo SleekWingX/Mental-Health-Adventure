@@ -20,6 +20,8 @@
     "@ant-design/icons": "^5.4.0",
     "@apollo/client": "^3.11.4",
     "@googlemaps/google-maps-services-js": "^3.4.0",
+    "@stripe/react-stripe-js": "^2.7.3",
+    "@stripe/stripe-js": "^4.2.0",
     "antd": "^5.20.1",
     "dotenv": "^16.4.5",
     "graphql": "^16.9.0",
