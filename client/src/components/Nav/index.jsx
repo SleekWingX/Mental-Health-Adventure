@@ -15,6 +15,11 @@ function Nav() {
             </Link>
           </li>
           <li className="mx-1">
+            <Link to="/donate" className="donate-button">
+              Donate
+            </Link>
+          </li>
+          <li className="mx-1">
             <a href="/" onClick={() => Auth.logout()}>
               Logout
             </a>

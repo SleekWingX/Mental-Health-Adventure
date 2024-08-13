@@ -10,7 +10,7 @@ import spinner from '../../assets/spinner.gif';
 function ProductList() {
   const [state, dispatch] = useStoreContext();
 
-  const { currentCategory } = state;
+  const { currentCategory, currentLocation, products } = state;
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
@@ -35,18 +35,54 @@ function ProductList() {
 
   function filterProducts() {
     if (!currentCategory) {
-      return state.products;
+      return products;
     }
 
-    return state.products.filter(
+    return products.filter(
       (product) => product.category._id === currentCategory
     );
   }
 
+  function getMostRecommendedProduct() {
+    // Assuming products have a `location` and `recommendationScore` field
+    if (!currentLocation) {
+      return null;
+    }
+
+    const locationProducts = products.filter(
+      (product) => product.location && product.location === currentLocation.name
+    );
+
+    if (locationProducts.length) {
+      return locationProducts.reduce((max, product) => 
+        max.recommendationScore > product.recommendationScore ? max : product
+      );
+    }
+
+    return null;
+  }
+
+  const mostRecommendedProduct = getMostRecommendedProduct();
+
   return (
     <div className="my-2">
-      <h2>Our Products:</h2>
-      {state.products.length ? (
+      <h2>Most Recommended Product:</h2>
+
+      {mostRecommendedProduct && (
+        <div>
+          <h3>Most Recommended Product for {currentLocation.name}:</h3>
+          <ProductItem
+            key={mostRecommendedProduct._id}
+            _id={mostRecommendedProduct._id}
+            image={mostRecommendedProduct.image}
+            name={mostRecommendedProduct.name}
+            price={mostRecommendedProduct.price}
+            quantity={mostRecommendedProduct.quantity}
+          />
+        </div>
+      )}
+
+      {products.length ? (
         <div className="flex-row">
           {filterProducts().map((product) => (
             <ProductItem

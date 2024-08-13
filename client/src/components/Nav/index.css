@@ -20,3 +20,16 @@
     }
   }
   
+  /* src/components/Nav/Nav.css */
+.donate-button {
+  background-color: #007bff;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.donate-button:hover {
+  background-color: #0056b3;
+}

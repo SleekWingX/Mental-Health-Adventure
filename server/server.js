@@ -1,3 +1,4 @@
+// server/server.js (or similar file)
 require('dotenv').config();
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
@@ -9,9 +10,12 @@ const bodyParser = require('body-parser');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 const { AuthenticationError } = require('./utils/auth');
+const Stripe = require('stripe');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -40,6 +44,25 @@ if (process.env.NODE_ENV === 'production') {
 // API Routes
 app.use('/api/places', placesRoutes);
 
+// Stripe Payment Route
+app.post('/create-payment-intent', async (req, res) => {
+  const { amount } = req.body;
+
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency: 'usd',
+    });
+
+    res.status(200).send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Start Apollo Server
 const startApolloServer = async () => {
   await server.start();
@@ -51,23 +74,6 @@ const startApolloServer = async () => {
     })
   );
 
-  // app.use('/graphql', expressMiddleware(server, {
-  //   context: ({ req }) => {
-  //     const token = req.headers.authorization || '';
-  //     if (token) {
-  //       try {
-  //         const { data } = jwt.verify(token.split(' ').pop().trim(), process.env.JWT_SECRET, { maxAge: '2h' });
-  //         return { user: data };
-  //       } catch (err) {
-  //         console.error('Invalid token');
-  //         throw new AuthenticationError();
-  //       }
-  //     }
-  //     return {};
-  //   }
-  //  secret
-  // }));
-
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
@@ -76,5 +82,4 @@ const startApolloServer = async () => {
   });
 };
 
-// Call the async function to start the server
 startApolloServer();
