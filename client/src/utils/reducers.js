@@ -8,6 +8,7 @@ import {
   UPDATE_CURRENT_CATEGORY,
   CLEAR_CART,
   TOGGLE_CART,
+  UPDATE_CURRENT_LOCATION, // Import the action
 } from './actions';
 
 // The reducer is a function that accepts the current state and an action. It returns a new state based on that action.
@@ -26,13 +27,13 @@ export const reducer = (state, action) => {
         cartOpen: true,
         cart: [...state.cart, action.product],
       };
+
     case ADD_MULTIPLE_TO_CART:
       return {
         ...state,
         cart: [...state.cart, ...action.products],
       };
-    // Returns a copy of state, sets the cartOpen to true and maps through the items in the cart.
-    // If the item's `id` matches the `id` that was provided in the action.payload, we update the purchase quantity.
+
     case UPDATE_CART_QUANTITY:
       return {
         ...state,
@@ -45,15 +46,11 @@ export const reducer = (state, action) => {
         }),
       };
 
-    // First we iterate through each item in the cart and check to see if the `product._id` matches the `action._id`
-    // If so, we remove it from our cart and set the updated state to a variable called `newState`
     case REMOVE_FROM_CART:
       let newState = state.cart.filter((product) => {
         return product._id !== action._id;
       });
 
-      // Then we return a copy of state and check to see if the cart is empty.
-      // If not, we set the cartOpen status to  `true`. Then we return an updated cart array set to the value of `newState`.
       return {
         ...state,
         cartOpen: newState.length > 0,
@@ -83,6 +80,12 @@ export const reducer = (state, action) => {
       return {
         ...state,
         currentCategory: action.currentCategory,
+      };
+
+    case UPDATE_CURRENT_LOCATION: // Handle the new action
+      return {
+        ...state,
+        currentLocation: action.currentLocation, // Update the state with the new location
       };
 
     // Return the state as is in the event that the `action.type` passed to our reducer was not accounted for by the developers
