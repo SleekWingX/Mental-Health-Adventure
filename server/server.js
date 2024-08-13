@@ -25,15 +25,6 @@ const server = new ApolloServer({
   },
 });
 
-// Middleware to redirect HTTP to HTTPS in production
-app.use((req, res, next) => {
-  if (process.env.NODE_ENV === 'production' && !req.secure) {
-    // Redirect to the HTTPS version of the URL
-    return res.redirect(`https://${req.headers.host}${req.url}`);
-  }
-  next();
-});
-
 // Middleware
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));

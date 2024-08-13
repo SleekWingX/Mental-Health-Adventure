@@ -25,5 +25,7 @@ As a user, I want to motivate myself to go to social gathering places and make n
 
 ## Screenshot
 
+![alt text](./client/src/assets/frontpage.jpg)
+
 ## Deployed Application
 https://mental-health-adventure.onrender.com/
