@@ -1,9 +1,10 @@
 const express = require('express');
 const { Client } = require('@googlemaps/google-maps-services-js');
 const router = express.Router();
+require('dotenv').config();
 
 const client = new Client({});
-const apiKey = 'AIzaSyC_3Bp0KcQBmN0C7-olv-LSC5bMVr9ZpgM';
+const apiKey = process.env.GOOGLE_API_KEY;
 
 router.get('/nearby', (req, res) => {
   const { location, radius, type } = req.query;
