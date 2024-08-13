@@ -1,4 +1,3 @@
-// src/App.jsx
 import { Outlet, Route, Routes, Navigate } from 'react-router-dom';
 import {
   ApolloClient,
@@ -10,12 +9,12 @@ import { setContext } from '@apollo/client/link/context';
 
 import Nav from './components/Nav';
 import { StoreProvider } from './utils/GlobalState';
-import Dashboard from './pages/Dashboard'; // Import Dashboard component
-import DonatePage from './pages/Donate'; // Import Donate component
-import LoginPage from './pages/Login'; // Import Login component
-import SignupPage from './pages/Signup'; // Import Signup component
-import HomePage from './pages/Home'; // Import Home component
-import Auth from './utils/auth'; // Import your Auth utility
+import Dashboard from './pages/Dashboard';
+import DonatePage from './pages/Donate';
+import LoginPage from './pages/Login';
+import SignupPage from './pages/Signup';
+import HomePage from './pages/Home';
+import Auth from './utils/auth';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -65,6 +64,8 @@ function App() {
               </ProtectedRoute>
             }
           />
+          {/* Add a catch-all route to match any other routes */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </StoreProvider>
     </ApolloProvider>
