@@ -1,0 +1,139 @@
+/* src/pages/Donate.css */
+.donate-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .logo-container {
+    position: relative;
+    margin-right: 60px; /* Move further to the left */
+  }
+  
+  .tp-logo {
+    width: 450px; /* Triple the size */
+    height: auto;
+    position: relative; /* Position relative for the thought bubble */
+  }
+  
+  .thought-bubble {
+    position: absolute;
+    top: -80px; /* Raise the bubble higher above the logo */
+    left: 100px; /* Center the bubble over the logo */
+    width: 180px;
+    height: 100px;
+    background: #ffffff;
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* For a fun look */
+  }
+  
+  .thought-bubble:before,
+  .thought-bubble:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: #ffffff;
+  }
+  
+  .thought-bubble:before {
+    width: 30px;
+    height: 30px;
+    bottom: -10px;
+    left: 20px;
+  }
+  
+  .thought-bubble:after {
+    width: 20px;
+    height: 20px;
+    bottom: -30px;
+    left: 40px;
+  }
+  
+  .thought-bubble p {
+    margin: 0;
+    padding: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .donation-form {
+    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px; /* Increased max-width */
+    width: 100%;
+    text-align: center;
+  }
+  
+  .donation-title {
+    font-size: 26px; /* Slightly larger font size */
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fafafa;
+  }
+  
+  .card-element-container {
+    margin-bottom: 30px;
+  }
+  
+  .card-element {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: #fafafa;
+  }
+  
+  .donation-button {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+  }
+  
+  .donation-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .donation-button:disabled {
+    background-color: #c0c0c0;
+    cursor: not-allowed;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
