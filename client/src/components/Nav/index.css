@@ -1,0 +1,22 @@
+@media screen and (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    nav ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    nav ul li {
+      margin: 0.5rem 0;
+    }
+  
+    .logo {
+      width: 60px; /* Smaller logo for mobile */
+      height: auto;
+    }
+  }
+  
